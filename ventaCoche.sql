@@ -135,11 +135,13 @@ group by  m.ciMecanico;
 -- -- 4.Listar todos aquellos clientes que compraron la marca del
 -- vehiculo “Toyota”, y sus respectivos, modelos,
 -- en la fecha que lo compraron, y cuanto tiempo ya lo tienen comprado.
-SELECT concat_ws(' ',m.apellidoPaterno,m.apellidoMaterno,m.segundoNombre,m.primerNombre) as NombreCompleto,
-       co.marca,co.modelo,
+SELECT concat_ws(' ',c.apellidoPaterno,c.apellidoMaterno,c.segundoNombre,c.primerNombre) as NombreCompleto,
+       co.marca,co.modelo,v.fecha ,
+       TIMESTAMPDIFF(YEAR,v.fecha,now()) AS 'Tiempo comprado'
 FROM cliente c inner  join  venta v on c.ciCliente = v.ciCliente
 inner join coche co on v.idCoche = co.idCoche
 and co.marca='toyota'
+group by co.modelo;
 -- 5.Listar cuantos vehículos repararon cada uno de los mecánicos.
 
 
@@ -153,15 +155,11 @@ and co.marca='toyota'
 
 -- 6.Listar cuantos vehículos compraron cada uno de los clientes.
 
-
-
-
-
-
-
-
-
-
+select c.ciCliente, concat_ws(' ',c.apellidoPaterno,c.apellidoMaterno,c.segundoNombre,c.primerNombre) as NombreCompleto,
+       count(v.idCoche) as 'total de coches'
+FROM cliente c inner  join  venta v on c.ciCliente = v.ciCliente
+inner join coche co on v.idCoche = co.idCoche
+group by c.ciCliente;
 
 
 -- 7.Listar aquellos clientes que compraron mas de 3 vehiculos.
