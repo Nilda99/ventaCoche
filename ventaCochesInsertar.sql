@@ -127,6 +127,9 @@ values(316,1,316,'1999-04-9',true ),
        (31222,2,31222,'2000-04-9',false ),
        (31224,3,31224,'2019-04-9',true ),
        (312348,4,31225,'1998-04-9',false );
+insert into venta(ciCliente, idCoche, ciUsuario, fecha, seguro)
+VALUES(316,1,316,now(),1) ;
+
 
 insert  into cochemecanico(idCoche, ciMecanico, fechaReparacion, horasTrabajadas)
 values(1,3128,'2000-04-9','2000-04-9'),
