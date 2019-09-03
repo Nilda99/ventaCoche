@@ -143,24 +143,16 @@ inner join coche co on v.idCoche = co.idCoche
 and co.marca='toyota'
 group by co.modelo;
 -- 5.Listar cuantos vehículos repararon cada uno de los mecánicos.
-select count(co.idCoche)as 'cantidad de coches reparados',co.modelo
+select count(co.idCoche)as 'cantidad de coches reparados',m.primerNombre
 from mecanico m inner join cocheMecanico cM on m.ciMecanico = cM.ciMecanico
 inner join coche co on cM.idCoche = co.idCoche
 group by m.ciMecanico;
 
 
-
-
-
-
-
-
-
-
 -- 6.Listar cuantos vehículos compraron cada uno de los clientes.
 
 select c.ciCliente, concat_ws(' ',c.apellidoPaterno,c.apellidoMaterno,c.segundoNombre,c.primerNombre) as NombreCompleto,
-       count(v.idCoche) as 'total de coches'
+       count(v.idCoche) as 'total de coches comprados'
 FROM cliente c inner  join  venta v on c.ciCliente = v.ciCliente
 inner join coche co on v.idCoche = co.idCoche
 group by c.ciCliente;
@@ -188,5 +180,13 @@ having totalCoches>3;
 -- que sean de las marcas: Zusuki, Toyota, Kia.
 -- 9.Listar aquellos mecánicos que repararon vehículos de
 -- segunda mano que sean de la marca ‘Suzuki’.
+select concat_ws(' ',m.apellidoPaterno,m.apellidoMaterno, m.segundoNombre,m.primerNombre)as'mecanicos que reparan vehiculos',co.marca
+from mecanico m inner join cocheMecanico cM on m.ciMecanico = cM.ciMecanico
+inner join coche co on cM.idCoche = co.idCoche
+and co.esNuevo=0
+and  co.marca='zusuqui';
 -- 10.Listar aquellos clientes que no hayan comprado
 -- los vehiculos de marca Mazda, Nissan.
+select
+from cliente c inner  join venta v on c.ciCliente = v.ciCliente
+inner join  coche co  on v.idCoche = co.idCoche
