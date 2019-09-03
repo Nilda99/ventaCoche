@@ -117,24 +117,74 @@ FOREIGN KEY(ciMecanico) REFERENCES mecanico(ciMecanico)
 ----  1Listar aquellos empleados, donde muestre
 -- su ci, nombre completo, edad de los trabajadores,
 --- en su estado mostrar si esta activo un “Activo” y si no “Inactivo”.
-SELECT
-FROM
+SELECT m.ciMecanico,concat_ws(' ',m.apellidoPaterno,m.apellidoMaterno,m.segundoNombre,m.primerNombre) as NombreCompleto ,
+        TIMESTAMPDIFF(YEAR,m.fechaNacimiento,CURDATE()) AS Edad,
+       if(m.activo=1,'Activo','Inactivo') as Estado
+FROM mecanico m;
 
 ----  2Listar los clientes con los respectivos vehículos que compraron.
-SELECT
-FROM
+SELECT concat_ws(' ',c.apellidoPaterno,c.apellidoMaterno,c.segundoNombre,c.primerNombre) as NombreCompleto,
+            concat_ws(' ',c2.marca,c2.modelo)as Coche
+FROM cliente c inner join venta v on c.ciCliente = v.ciCliente
+    inner join coche c2 on v.idCoche = c2.idCoche;
 ----  3Listar cuantos años tienen cada mecánico.
-SELECT
-FROM
+SELECT concat_ws(' ',m.apellidoPaterno,m.apellidoMaterno,m.segundoNombre,m.primerNombre) as NombreCompleto ,
+       TIMESTAMPDIFF(YEAR,m.fechaNacimiento,CURDATE()) AS Edad
+FROM mecanico m
+group by  m.ciMecanico;
 -- -- 4.Listar todos aquellos clientes que compraron la marca del
 -- vehiculo “Toyota”, y sus respectivos, modelos,
 -- en la fecha que lo compraron, y cuanto tiempo ya lo tienen comprado.
-SELECT
-FROM
+SELECT concat_ws(' ',m.apellidoPaterno,m.apellidoMaterno,m.segundoNombre,m.primerNombre) as NombreCompleto,
+       co.marca,co.modelo,
+FROM cliente c inner  join  venta v on c.ciCliente = v.ciCliente
+inner join coche co on v.idCoche = co.idCoche
+and co.marca='toyota'
 -- 5.Listar cuantos vehículos repararon cada uno de los mecánicos.
+
+
+
+
+
+
+
+
+
+
 -- 6.Listar cuantos vehículos compraron cada uno de los clientes.
+
+
+
+
+
+
+
+
+
+
+
+
 -- 7.Listar aquellos clientes que compraron mas de 3 vehiculos.
+
+
+
+
+
+
+
+
+
+
+
 -- 8.Listar aquellos clientes que compraron mas de 3 vehiculos
+
+
+
+
+
+
+
+
 -- que sean de las marcas: Zusuki, Toyota, Kia.
 -- 9.Listar aquellos mecánicos que repararon vehículos de
 -- segunda mano que sean de la marca ‘Suzuki’.
