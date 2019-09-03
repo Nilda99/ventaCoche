@@ -116,5 +116,17 @@ values(3128,111,'Edson','Eduardo','Hidalg','Rofrigues','mama','1999-04-5'),
 
 -- insertando datos usuario
 insert  into usuario(ciUsuario, idRol, primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno, usuario, contrasenia, activo)
-values()
- 
+values(316,1,'Edson','Eduardo','Hidalg','Rofrigues','administrador','nil12',true),
+       (31222,2,'veronica','vero','Hidalg','Rofrigues','contrasenia','78n2',false),
+       (31224,3,'heber','eber','Hidalg','Rofrigues','vendedor','nn2',true),
+       (31225,4,'neydi','jhislen','Hidalg','Rofrigues','cliente','123g',false ),
+       (31228,1,'Edson','jhon','Hidalg','Rofrigues','administrador','456g',true);
+
+insert  into venta(ciCliente, idCoche, ciUsuario, fecha, seguro)
+values(316,1,316,'1999-04-9',true ),
+       (31222,2,31222,'2000-04-9',false ),
+       (31224,3,31224,'2019-04-9',true ),
+       (312348,4,31225,'1998-04-9',false );
+
+insert  into cochemecanico(idCoche, ciMecanico, fechaReparacion, horasTrabajadas)
+values(1,3128,'2000-04-9',)
