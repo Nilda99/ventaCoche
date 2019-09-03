@@ -169,15 +169,17 @@ group by c.ciCliente
 having totalCoches>3;
 
 -- 8.Listar aquellos clientes que compraron mas de 3 vehiculos
-
-
-
-
-
-
-
-
 -- que sean de las marcas: Zusuki, Toyota, Kia.
+select c.ciCliente, concat_ws(' ',c.apellidoPaterno,c.apellidoMaterno,c.segundoNombre,c.primerNombre) as NombreCompleto,
+       count(v.idCoche) as 'totalCoches'
+FROM cliente c inner  join  venta v on c.ciCliente = v.ciCliente
+inner join coche co on v.idCoche = co.idCoche
+and co.marca='toyota'
+group by c.ciCliente
+having totalCoches>3;
+
+
+
 -- 9.Listar aquellos mecánicos que repararon vehículos de
 -- segunda mano que sean de la marca ‘Suzuki’.
 select concat_ws(' ',m.apellidoPaterno,m.apellidoMaterno, m.segundoNombre,m.primerNombre)as'mecanicos que reparan vehiculos',co.marca
