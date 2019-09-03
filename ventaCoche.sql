@@ -143,6 +143,10 @@ inner join coche co on v.idCoche = co.idCoche
 and co.marca='toyota'
 group by co.modelo;
 -- 5.Listar cuantos vehículos repararon cada uno de los mecánicos.
+select count(co.idCoche)as 'cantidad de coches reparados',co.modelo
+from mecanico m inner join cocheMecanico cM on m.ciMecanico = cM.ciMecanico
+inner join coche co on cM.idCoche = co.idCoche
+group by m.ciMecanico;
 
 
 
